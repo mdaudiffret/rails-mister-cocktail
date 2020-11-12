@@ -16,3 +16,14 @@ require("channels")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+// import AOS from 'aos';
+// import 'aos/dist/aos.css'; // You can also use <link> for styles
+// // ..
+// AOS.init();
+
+import { initSelect2 } from '../components/init_select2';
+
+document.addEventListener("turbolinks:load", function() {
+  initSelect2();
+});

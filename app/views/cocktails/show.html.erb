@@ -5,8 +5,11 @@
 </div>
 <br>
 
-<%= link_to "◀︎ back to the list", cocktails_path, class: "btn btn-sm btn-outline-secondary rounded-pill" %>
-<br><br>
+<div class="d-flex justify-content-between align-items-center flex-wrap">
+  <h3>Description</h3>
+  <%= link_to "◀︎ back to the list", cocktails_path, class: "btn btn-sm btn-outline-secondary rounded-pill" %>
+</div>
+
 <p><%= @cocktail.description ? @cocktail.description : "No description for this cocktail" %></p>
 
 <div class="d-flex justify-content-between align-items-center flex-wrap">
@@ -15,6 +18,7 @@
     add a dose
   </button>
 </div>
+
 <ul class="list-group">
   <% if @cocktail.doses.empty? %>
     <p class="badge badge-pill badge-warning">No dosage for this cocktail yet, you can add the first one!</p>
@@ -32,11 +36,6 @@
 </ul>
 <br>
 
-
-
-<!-- Button trigger modal -->
-
-
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -50,7 +49,7 @@
       <div class="modal-body">
           <%= simple_form_for [@cocktail, @dose] do |f| %>
             <%= f.input :description %>
-            <%= f.association :ingredient %>
+            <%= f.association :ingredient, input_html: { class: 'select2' } %>
             <%= f.submit class: "btn btn-sm btn-outline-primary rounded-pill"%>
           <% end %>
       </div>

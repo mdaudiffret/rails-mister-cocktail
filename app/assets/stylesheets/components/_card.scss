@@ -2,6 +2,8 @@
   margin: 8px;
   box-shadow: 4px 4px 0px $primary;
   border: solid 2px white;
+  min-width: 200px;
+  flex-grow: 4;
   &:hover {
     box-shadow: 6px 6px 0px $secondary;
   }
@@ -11,4 +13,9 @@
   margin: 8px;
   box-shadow: 4px 4px 0px $primary;
   border: solid 2px white;
+  max-width: 100%;
+}
+
+.select2 {
+  width: 466px;
 }
