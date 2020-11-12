@@ -1,0 +1,9 @@
+<div class="d-flex justify-content-between align-items-center sticky-top" style="background-color: #F4F4F4">
+  <h1>New coctail</h1>
+  <%= link_to "◀︎ back to list", cocktails_path, class: "btn btn-outline-secondary btn-sm rounded-pill" %>
+</div>
+<%= simple_form_for @cocktail do |f| %>
+  <%= f.input :name %>
+  <%= f.input :description %>
+  <%= f.submit "Add cocktail", class: "btn btn-outline-primary btn-sm rounded-pill" %>
+<% end %>

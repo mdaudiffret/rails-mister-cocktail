@@ -1,0 +1,24 @@
+<div class="card bg-dark text-white" style="background-image: url('<%= @cocktail.picture_url %>'); background-size: cover; background-position: center; height: 300px; width: 100%">
+  <div class="card-img-overlay d-flex justify-content-center align-items-center">
+    <h1 class="card-title"><%= @cocktail.name %></h1>
+  </div>
+</div>
+<br>
+
+<%= link_to "◀︎ back to the list", cocktails_path, class: "btn btn-sm btn-outline-secondary rounded-pill" %>
+<br><br>
+<p><%= @cocktail.description ? @cocktail.description : "No description for this cocktail" %></p>
+
+<h3>Doses</h3>
+<% if @cocktail.doses = [] %>
+  <p class="badge badge-pill badge-warning">No dosage for this cocktail yet, you can add the first one!</p>
+<% else %>
+  <%= @cocktail.doses %>
+<% end %>
+
+<h3>Add doses</h3>
+<%= simple_form_for [@cocktail, @dose] do |f| %>
+  <%= f.input :description %>
+  <%= f.association :ingredient %>
+  <%= f.submit class: "btn btn-sm btn-outline-primary rounded-pill"%>
+<% end %>
