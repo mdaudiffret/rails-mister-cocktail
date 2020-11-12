@@ -24,7 +24,7 @@
         <%= dose.ingredient.name %>
         <div>
         <span class="badge badge-primary badge-pill"><%= dose.description %></span>
-        <%= link_to '✕', cocktail_dose_path([@cocktail, dose]), method: :delete, class: "badge badge-danger badge-pill" %>
+        <%= link_to '✕', cocktail_dose_path(dose), method: :delete, class: "badge badge-danger badge-pill" %>
         </div>
       </li>
     <% end %>
