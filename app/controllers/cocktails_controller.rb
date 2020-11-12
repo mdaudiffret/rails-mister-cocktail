@@ -15,9 +15,17 @@ class CocktailsController < ApplicationController
 
   def create
     @cocktail = Cocktail.new(cocktail_params)
-    @cocktail.picture_url = Unsplash::Photo.search(@cocktail.name)[0][:urls]['small']
+    if Unsplash::Photo.search(@cocktail.name).empty?
+      @cocktail.picture_url = Unsplash::Photo.search("dinosaure")[0][:urls]['small']
+    else
+      @cocktail.picture_url = Unsplash::Photo.search(@cocktail.name)[0][:urls]['small']
+    end
     @cocktail.save
-    redirect_to cocktails_path
+    if @cocktail.save
+      redirect_to cocktails_path
+    else
+      render :new
+    end
   end
 
   private
