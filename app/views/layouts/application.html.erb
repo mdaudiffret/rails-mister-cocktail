@@ -12,6 +12,17 @@
   </head>
 
   <body>
+    <div class="banner d-flex white justify-content-center align-items-center">
+      <div class="navbar fixed-top">
+        <div class="container">
+          <%= image_tag 'logo.png', height: "40px" %>
+          <%= image_tag 'avatar.jpg', class: "avatar" %>
+        </div>
+      </div>
+      <div>
+        <span id="banner-typed-text"></span>
+      </div>
+    </div>
     <div class='container'>
       <%= yield %>
     </div>

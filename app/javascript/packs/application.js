@@ -21,9 +21,13 @@ require("channels")
 // import 'aos/dist/aos.css'; // You can also use <link> for styles
 // // ..
 // AOS.init();
-
+import { initUpdateNavbarOnScroll } from '../components/navbar';
 import { initSelect2 } from '../components/init_select2';
+import { loadDynamicBannerText } from '../components/navbar';
 
-document.addEventListener("turbolinks:load", function() {
+document.addEventListener('turbolinks:load', () => {
+  // Call your JS functions here
+  loadDynamicBannerText();
+  initUpdateNavbarOnScroll();
   initSelect2();
 });
