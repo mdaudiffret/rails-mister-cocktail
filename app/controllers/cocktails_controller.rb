@@ -30,7 +30,6 @@ class CocktailsController < ApplicationController
 
   def update
     @cocktail.save
-    raise
     if @cocktail.save
       redirect_to cocktail_path(@cocktail)
     else
