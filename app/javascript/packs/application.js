@@ -3,27 +3,20 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 import 'bootstrap';
+import { initUpdateNavbarOnScroll } from '../components/navbar';
+import { initSelect2 } from '../components/init_select2';
+import { loadDynamicBannerText } from '../components/navbar';
 
 require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 
+// loadDynamicBannerText();
+// initUpdateNavbarOnScroll();
+// initSelect2();
 
-// Uncomment to copy all static images under ../images to the output folder and reference
-// them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
-// or the `imagePath` JavaScript helper below.
-//
-// const images = require.context('../images', true)
-// const imagePath = (name) => images(name, true)
-
-// import AOS from 'aos';
-// import 'aos/dist/aos.css'; // You can also use <link> for styles
-// // ..
-// AOS.init();
-import { initUpdateNavbarOnScroll } from '../components/navbar';
-import { initSelect2 } from '../components/init_select2';
-import { loadDynamicBannerText } from '../components/navbar';
+console.log("Hello from app/javascript/packs/application.js!");
 
 document.addEventListener('turbolinks:load', () => {
   // Call your JS functions here
