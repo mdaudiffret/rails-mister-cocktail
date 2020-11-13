@@ -13,15 +13,15 @@
 <p><%= @cocktail.description ? @cocktail.description : "No description for this cocktail" %></p>
 
 <div class="d-flex justify-content-between align-items-center flex-wrap">
-  <h3>Doses</h3>
+  <h3>Ingredients</h3>
   <button type="button" class="btn btn-outline-primary btn-sm rounded-pill" data-toggle="modal" data-target="#exampleModal">
-    add a dose
+    add an ingredient
   </button>
 </div>
 
 <ul class="list-group">
   <% if @cocktail.doses.empty? %>
-    <p class="badge badge-pill badge-warning">No dosage for this cocktail yet, you can add the first one!</p>
+    <p class="badge badge-pill badge-warning">No ingredient for this cocktail yet, you can add the first one!</p>
   <% else %>
     <% @cocktail.doses.each do |dose| %>
       <li class="list-group-item d-flex justify-content-between align-items-center">
