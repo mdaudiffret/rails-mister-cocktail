@@ -1,57 +1,93 @@
-<div class="ck-card-no-h card bg-dark text-white" style="background-image: url('<%= @cocktail.picture_url %>'); background-size: cover; background-position: center; height: 300px; width: 100%">
-  <div class="card-img-overlay d-flex justify-content-center align-items-center">
-    <h1 class="card-title"><%= @cocktail.name %></h1>
+ <div class="navbar-blue fixed-top d-flex align-items-center">
+  <div class="container d-flex justify-content-between ">
+    <%= image_tag 'logo.png', class: "logo" %>
+    <%= image_tag 'avatar.jpg', class: "avatar" %>
   </div>
 </div>
 <br>
-
-<div class="d-flex justify-content-between align-items-center flex-wrap">
-  <h3>Description</h3>
-  <%= link_to "◀︎ back to the list", cocktails_path, class: "btn btn-sm btn-outline-secondary rounded-pill" %>
-</div>
-
-<p><%= @cocktail.description ? @cocktail.description : "No description for this cocktail" %></p>
-
-<div class="d-flex justify-content-between align-items-center flex-wrap">
-  <h3>Ingredients</h3>
-  <button type="button" class="btn btn-outline-primary btn-sm rounded-pill" data-toggle="modal" data-target="#exampleModal">
-    add an ingredient
-  </button>
-</div>
-
-<ul class="list-group">
-  <% if @cocktail.doses.empty? %>
-    <p class="badge badge-pill badge-warning">No ingredient for this cocktail yet, you can add the first one!</p>
-  <% else %>
-    <% @cocktail.doses.each do |dose| %>
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <%= dose.ingredient.name %>
-        <div>
-        <span class="badge badge-primary badge-pill"><%= dose.description %></span>
-        <%= link_to '✕', dose_path(dose), method: :delete, class: "badge badge-danger badge-pill" %>
-        </div>
-      </li>
-    <% end %>
-  <% end %>
-</ul>
 <br>
+<br>
+<div class="container">
+  <div class="ck-card-no-h card bg-dark text-white" style="background-image: url('<%= @cocktail.picture_url %>'); background-size: cover; background-position: center; height: 300px; width: 100%">
+    <div class="card-img-overlay d-flex justify-content-center align-items-center flex-column">
+      <h1 class="card-title"><%= @cocktail.name %></h1>
+      <button type="button" class="btn btn-outline-light btn-sm rounded-pill" data-toggle="modal" data-target="#editPicture">
+        <i class="fas fa-pen"></i>
+      </button>
+    </div>
+  </div>
+  <br>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add an ingredient</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+  <div class="d-flex justify-content-between align-items-center flex-wrap">
+    <h3>Description</h3>
+    <%= link_to "◀︎ back to the list", cocktails_path, class: "btn btn-sm btn-outline-secondary rounded-pill" %>
+  </div>
+
+  <p><%= @cocktail.description ? @cocktail.description : "No description for this cocktail" %></p>
+
+  <div class="d-flex justify-content-between align-items-center flex-wrap">
+    <h3>Ingredients</h3>
+    <button type="button" class="btn btn-outline-primary btn-sm rounded-pill" data-toggle="modal" data-target="#addIngredient">
+      add an ingredient
+    </button>
+  </div>
+
+  <ul class="list-group">
+    <% if @cocktail.doses.empty? %>
+      <p class="badge badge-pill badge-warning">No ingredient for this cocktail yet, you can add the first one!</p>
+    <% else %>
+      <% @cocktail.doses.each do |dose| %>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <%= dose.ingredient.name %>
+          <div>
+          <span class="badge badge-primary badge-pill"><%= dose.description %></span>
+          <%= link_to '✕', dose_path(dose), method: :delete, class: "badge badge-danger badge-pill" %>
+          </div>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+  <br>
+  <% if @cocktail.photo.attached? %>
+    <%= cl_image_tag @cocktail.photo.key, height: 300, width: 400, crop: :fill %>
+  <% end %>
+  <!-- Modal new ingredient -->
+  <div class="modal fade" id="addIngredient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add an ingredient</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <%= simple_form_for [@cocktail, @dose] do |f| %>
+              <%= f.input :description %>
+              <%= f.association :ingredient, input_html: { class: 'select2' } %>
+              <%= f.submit class: "btn btn-sm btn-outline-primary rounded-pill"%>
+            <% end %>
+        </div>
       </div>
-      <div class="modal-body">
-          <%= simple_form_for [@cocktail, @dose] do |f| %>
-            <%= f.input :description %>
-            <%= f.association :ingredient, input_html: { class: 'select2' } %>
-            <%= f.submit class: "btn btn-sm btn-outline-primary rounded-pill"%>
-          <% end %>
+    </div>
+  </div>
+
+  <!-- Modal edit picture -->
+  <div class="modal fade" id="editPicture" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Change picture</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <%= simple_form_for @cocktail do |f| %>
+              <%= f.input :photo, as: :file %>
+              <%= f.submit class: "btn btn-sm btn-outline-primary rounded-pill"%>
+            <% end %>
+        </div>
       </div>
     </div>
   </div>

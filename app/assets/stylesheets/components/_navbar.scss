@@ -20,13 +20,13 @@
 .navbar {
   // background-color: $primary;
   height: 64px;
-  position: sticky-top;
   background-color: transparent;
   transition: 0.5s background-color ease;
 }
 
 .navbar-blue {
   background-color: $primary;
+  height: 64px;
 }
 
 .logo {
