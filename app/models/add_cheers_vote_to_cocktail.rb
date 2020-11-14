@@ -1,0 +1,2 @@
+class AddCheersVoteToCocktail < ApplicationRecord
+end

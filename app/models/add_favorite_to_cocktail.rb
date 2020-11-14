@@ -1,0 +1,2 @@
+class AddFavoriteToCocktail < ApplicationRecord
+end
