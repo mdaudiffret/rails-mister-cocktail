@@ -29,6 +29,7 @@ class CocktailsController < ApplicationController
   end
 
   def update
+    @cocktail.photo = params[:cocktail][:photo]
     @cocktail.save
     if @cocktail.save
       redirect_to cocktail_path(@cocktail)
